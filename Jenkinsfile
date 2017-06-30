@@ -8,8 +8,9 @@ node {
     }
 
     stage('build'){
-        withMaven( maven: 'mvn 3.0.5') {
-            sh "mvn -B clean compile "
+
+        withMaven(maven: 'mvn 3.5.0') {
+            sh "mvn -B clean install "
         }
     }
 }
