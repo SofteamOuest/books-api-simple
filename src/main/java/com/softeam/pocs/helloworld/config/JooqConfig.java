@@ -35,7 +35,8 @@ public class JooqConfig {
         return new DataSourceConnectionProvider(dataSource());
     }
 
-    private DataSource dataSource() {
+    @Bean
+    public DataSource dataSource() {
 
         DriverManagerDataSource driver = new DriverManagerDataSource();
 

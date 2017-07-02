@@ -21,7 +21,8 @@ public class BooksResource {
 
     @GetMapping
     public Collection<BookDto> helloworld() {
-        return booksBlo.findAll();
+        Collection<BookDto> all = booksBlo.findAll();
+        return all;
     }
 
 }

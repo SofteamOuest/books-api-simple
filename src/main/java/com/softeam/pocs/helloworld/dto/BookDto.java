@@ -5,6 +5,22 @@ package com.softeam.pocs.helloworld.dto;
  */
 public class BookDto {
 
+    private Integer id;
+
     private String title;
 
+    public BookDto(Integer id, String s) {
+
+        this.id = id;
+
+        this.title = s;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
 }
