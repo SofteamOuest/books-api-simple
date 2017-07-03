@@ -16,11 +16,11 @@ node {
     }
 }*/
 
-podTemplate(label: 'jenkins', containers: [
+podTemplate(label: 'app: jenkins', containers: [
         containerTemplate(name: 'maven', image: 'maven:3.3.9-jdk-8-alpine', ttyEnabled: true, command: 'cat')
 ]) {
 
-    node('jenkins') {
+    node('app: jenkins') {
         stage('Get a Maven project') {
             git 'https://github.com/jenkinsci/kubernetes-plugin.git'
             container('maven') {
