@@ -16,6 +16,13 @@ node {
     }
 }*/
 
+kubernetes.pod('buildpod').withImage('maven').inside {
+    git 'https://git.wildwidewest.xyz/melkouhen/helloworld.git'
+    sh 'mvn clean install'
+}
+
+/*
+
 podTemplate(containers: [
         containerTemplate(name: 'maven', image: 'maven:3.3.9-jdk-8-alpine', ttyEnabled: true, command: 'cat')
 ]) {
@@ -30,4 +37,4 @@ podTemplate(containers: [
             }
         }
     }
-}
+}*/
