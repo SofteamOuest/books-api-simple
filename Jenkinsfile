@@ -19,8 +19,9 @@ node {
 
 podTemplate(label: 'mypod', containers: [
         containerTemplate(name: 'maven',
-                image: 'maven:3.5-jdk-8',
+                image: 'maven:3.3.9-jdk-8-alpine',
                 ttyEnabled: true,
+                command: 'cat',
                 envVars: [
                         containerEnvVar(key: 'JENKINS_URL', value: 'jenkins')
                 ])
