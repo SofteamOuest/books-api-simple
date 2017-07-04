@@ -19,7 +19,13 @@ node {
 
 
 podTemplate(label: 'mypod', containers: [
-        containerTemplate(name: 'maven', image: 'maven:3.3.9-jdk-8-alpine', ttyEnabled: true, command: 'cat')
+        containerTemplate(name: 'maven',
+                image: 'maven:3.3.9-jdk-8-alpine',
+                ttyEnabled: true,
+                command: 'cat',
+                envVars: [
+                        containerEnvVar(key: 'JENKINS_URL', value: '10.97.244.155')
+                ])
 ]) {
 
     node('mypod') {

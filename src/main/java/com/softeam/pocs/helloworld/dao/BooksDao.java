@@ -19,8 +19,6 @@ public class BooksDao {
 
     public Collection<BookDto> findAll() {
         return jooq.select(Tables.T_BOOK.BOK_ID, Tables.T_BOOK.BOK_TITLE).from(Tables.T_BOOK)
-                .fetch().map(idAndTitle -> {
-                    return new BookDto(idAndTitle.value1(), idAndTitle.value2());
-                });
+                .fetch().map(idAndTitle -> new BookDto(idAndTitle.value1(), idAndTitle.value2()));
     }
 }
