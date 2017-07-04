@@ -21,10 +21,7 @@ podTemplate(label: 'mypod', containers: [
         containerTemplate(name: 'maven',
                 image: 'maven:3.3.9-jdk-8-alpine',
                 ttyEnabled: true,
-                command: 'cat',
-                envVars: [
-                        containerEnvVar(key: 'JENKINS_URL', value: 'jenkins')
-                ])
+                command: 'cat')
 ]) {
 
     node('mypod') {
@@ -34,12 +31,10 @@ podTemplate(label: 'mypod', containers: [
 
             container('maven') {
 
-                sh 'mvn clean install'
-
-                /* stage('Build a Maven project') {
+                stage('Build a Maven project') {
                     sh 'which mvn'
                     sh 'mvn -B clean install'
-                } */
+                }
             }
         }
     }
