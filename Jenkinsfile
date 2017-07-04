@@ -24,7 +24,7 @@ podTemplate(label: 'mypod', containers: [
                 ttyEnabled: true,
                 command: 'cat',
                 envVars: [
-                        containerEnvVar(key: 'JENKINS_URL', value: '10.97.244.155')
+                        containerEnvVar(key: 'JENKINS_URL', value: 'jenkins')
                 ])
 ]) {
 
