@@ -18,11 +18,11 @@ node {
 
 
 
-podTemplate(label: 'mypod', containers: [
+/*podTemplate(label: 'mypod', containers: [
         containerTemplate(name: 'maven', image: 'maven:3.3.9-jdk-8-alpine', ttyEnabled: true, command: 'cat')
-]) {
+]) {*/
 
-    node('mypod') {
+    node/*('mypod')*/ {
         stage('Get a Maven project') {
             git 'https://git.wildwidewest.xyz/melkouhen/helloworld.git'
             container('maven') {
