@@ -29,7 +29,7 @@ podTemplate(label: 'mypod', containers: [
 
     node('mypod') {
         stage('Get a Maven project') {
-            git 'https://git.wildwidewest.xyz/melkouhen/helloworld.git'
+            git 'https://melkouhen:softeam35@git.wildwidewest.xyz/melkouhen/helloworld.git'
             container('maven') {
                 stage('Build a Maven project') {
                     sh 'mvn -B clean install'
