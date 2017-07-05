@@ -29,6 +29,8 @@ podTemplate(label: 'mypod', containers: [
 
             git credentialsId: '53c71862-c245-4f4a-8fa1-b86ef32d0092', url: 'https://git.wildwidewest.xyz/melkouhen/helloworld.git'
 
+            sh 'ls'
+
             container('maven') {
 
                 sh 'ls'
