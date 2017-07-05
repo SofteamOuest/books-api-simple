@@ -1,22 +1,6 @@
 #!groovy
 import java.text.SimpleDateFormat
 
-/*
-node {
-
-    stage('checkout'){
-        checkout scm
-    }
-
-    stage('build'){
-
-        withMaven(maven: 'mvn 3.5.0') {
-            sh "mvn -B clean install "
-        }
-    }
-}*/
-
-
 podTemplate(label: 'mypod', containers: [
         containerTemplate(name: 'jnlp', image: 'jenkinsci/jnlp-slave:alpine'),
         containerTemplate(name: 'maven',
@@ -27,11 +11,11 @@ podTemplate(label: 'mypod', containers: [
 
     node('mypod') {
 
-        /*git credentialsId: '53c71862-c245-4f4a-8fa1-b86ef32d0092', url: 'https://git.wildwidewest.xyz/melkouhen/helloworld.git'
-*/
+        git credentialsId: '53c71862-c245-4f4a-8fa1-b86ef32d0092', url: 'https://git.wildwidewest.xyz/melkouhen/helloworld.git'
+
         container('maven') {
 
-            sh 'pwd'
+            sh 'mvn clean install'
         }
     }
 }
