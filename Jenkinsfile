@@ -31,10 +31,13 @@ podTemplate(label: 'mypod', containers: [
 
             container('maven') {
 
+                sh 'ls'
+
+                /*
                 stage('Build a Maven project') {
                     sh 'which mvn'
                     sh 'mvn -B clean install'
-                }
+                }*/
             }
         }
     }
