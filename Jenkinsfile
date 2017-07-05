@@ -31,6 +31,8 @@ podTemplate(label: 'mypod', containers: [
 
             sh 'ls'
 
+            sh 'mvn -B clean install'
+
             container('maven') {
 
                 sh 'ls'
