@@ -18,8 +18,9 @@ node {
 
 
 podTemplate(label: 'mypod', containers: [
+        containerTemplate(name: 'jnlp', image: 'jenkinsci/jnlp-slave:alpine'),
         containerTemplate(name: 'maven',
-                image: 'maven:3.3.9-jdk-8-alpine',
+                image: 'maven:3.5.0',
                 ttyEnabled: true,
                 command: 'cat')
 ]) {
