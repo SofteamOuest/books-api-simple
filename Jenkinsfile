@@ -30,7 +30,7 @@ podTemplate(label: 'mypod', containers: [
 */
         container('maven') {
 
-            sh 'ls'
+            sh 'pwd'
         }
     }
 }
