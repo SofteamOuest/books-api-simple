@@ -25,24 +25,12 @@ podTemplate(label: 'mypod', containers: [
 ]) {
 
     node('mypod') {
-        stage('Get a Maven project') {
 
-            git credentialsId: '53c71862-c245-4f4a-8fa1-b86ef32d0092', url: 'https://git.wildwidewest.xyz/melkouhen/helloworld.git'
+        /*git credentialsId: '53c71862-c245-4f4a-8fa1-b86ef32d0092', url: 'https://git.wildwidewest.xyz/melkouhen/helloworld.git'
+*/
+        container('maven') {
 
             sh 'ls'
-
-            sh 'mvn -B clean install'
-
-            container('maven') {
-
-                sh 'ls'
-
-                /*
-                stage('Build a Maven project') {
-                    sh 'which mvn'
-                    sh 'mvn -B clean install'
-                }*/
-            }
         }
     }
 }
