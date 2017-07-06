@@ -105,3 +105,14 @@ spec:
 <2> Nom du service exposé
 <3> Port du service exposé
 
+== Remarques
+
+=== Gestion des propriétés
+
+Les propriétés d'une application Kubernetes sont passées en tant que variables d'environnement (pas de fichier de propriétés).
+
+=== DNS
+
+Kubernetes gère un DNS et crée une entrée dans le DNS pour chaque service.
+
+Le service helloworld accède au service "postgres" via le nom du service.
