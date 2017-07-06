@@ -19,24 +19,12 @@ podTemplate(label: 'mypod', nodeSelector: 'medium', containers: [
 
         container('maven') {
 
-            //sh 'mvn clean install'
-        }
+            sh 'mvn clean install'
 
-        container('docker') {
-
-            sh 'ls -la /etc'
-
-            sh 'mkdir /etc/docker'
-
-            sh 'echo "{\"insecure-registries\" : [\"registry.wildwidewest.xyz\"]}" > /etc/docker/daemon.json'
-
-            sh 'apk update'
-
-            sh 'apk add openrc --no-cache'
-
-            sh 'apk add docker'
-
-            sh 'docker login -u admin -p admin123 registry.wildwidewest.xyz '
+            sh 'curl -v -F r=snapshots -F hasPom=false -F e=jar ' +
+                    '-F g=com.softeam.pocs -F a=helloworld -F v=1.0.0-SNAPSHOT -F p=jar ' +
+                    '-F file=@helloworld.jar ' +
+                    '-u admin:admin123 http://nexus.wildwidewest.xyz/service/local/artifact/maven/content'
         }
     }
 }
