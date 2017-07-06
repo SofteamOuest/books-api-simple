@@ -8,7 +8,10 @@ podTemplate(label: 'mypod', nodeSelector: 'medium', containers: [
                 ttyEnabled: true,
                 command: 'cat'),
         containerTemplate(name: 'docker',
-                image: 'docker', command: 'cat', ttyEnabled: true)],
+                image: 'docker', command: 'cat', ttyEnabled: true), //
+        containerTemplate(name: 'kubectl',
+                image: 'wernight/kubectl', command: 'cat', ttyEnabled: true)
+],
         volumes: [hostPathVolume(hostPath: '/var/run/docker.sock', mountPath: '/var/run/docker.sock')]
 ) {
 
@@ -32,6 +35,11 @@ podTemplate(label: 'mypod', nodeSelector: 'medium', containers: [
             sh 'docker build . -t registry.wildwidewest.xyz/repository/docker-repository/pocs/helloworld'
 
             sh 'docker push registry.wildwidewest.xyz/repository/docker-repository/pocs/helloworld'
+        }
+
+        container('kubectl') {
+
+            sh 'kubectl apply -f src/main/kubernetes/deployment.yml'
         }
     }
 }

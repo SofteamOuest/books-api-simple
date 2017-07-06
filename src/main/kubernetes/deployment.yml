@@ -1,0 +1,19 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: helloworld
+spec:
+  replicas: 1
+  template:
+    metadata:
+     labels:
+        app: helloworld
+    spec:
+      containers:
+      - name: helloworld
+        image: registry.wildwidewest.xyz/repository/docker-repository/pocs/helloworld
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8080
+      imagePullSecrets:
+      - name: regsecret
