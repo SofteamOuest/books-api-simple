@@ -23,6 +23,14 @@ Le déploiement de l'application est réalisé en applicant les fichiers de conf
 * src/main/kubernetes/postgresql.yml : déploiement de la base de données
 * src/main/kubernetes/helloworld.yml : déploiement de l'application
 
+=== Objets Kubernetes
+
+Dans le cadre de ce projet, j'ai utilisé 3 types d'objets Kubernetes
+
+* Deployment : pour le déploiement d'applications conteneurisées
+* Service : pour la définition de services des applications conteneurisées (un service = un point d'accès aux conteneurs)
+* Ingress : pour l'exposition des services sur Internet
+
 === Deployment
 
 L'objet Deployment spécifie comment déployer un Pod (ensemble de conteneurs Docker).
