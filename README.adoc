@@ -7,6 +7,14 @@ La définition du JOB Jenkins est réalisée dans le Jenkinsfile.
 
 Le JOB construit une image Docker est publie l'image sur notre dépot : registry.wildwidewest.xyz
 
+Le script Jenkinsfile
+
+* Checkout les sources GIT
+* Construit le binaire java de l'application (un jar exécutable springboot)
+* Construit l'image Docker de l'application
+* Publie l'image Docker sur le registry Docker
+* Déploie l'application sur Kubernetes
+
 == Déploiement Kubernetes
 
 Le déploiement de l'application est réalisé en applicant les fichiers de configuration kubernetes
