@@ -32,6 +32,8 @@ podTemplate(label: 'mypod', nodeSelector: 'medium', containers: [
 
             sh 'apk add openrc --no-cache'
 
+            sh 'apk add docker'
+
             sh 'rc-service docker start'
 
             sh 'docker login -u admin -p admin123 registry.wildwidewest.xyz '
