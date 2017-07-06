@@ -39,8 +39,8 @@ podTemplate(label: 'helloworld-build-pod', nodeSelector: 'medium', containers: [
 
         container('kubectl') {
 
-            sh 'kubectl --namespace=helloworld --server=http://92.222.81.117:8080 apply -f src/main/kubernetes/postgresql.yml'
-            sh 'kubectl --namespace=helloworld --server=http://92.222.81.117:8080 apply -f src/main/kubernetes/helloworld.yml'
+            sh 'kubectl --namespace=development --server=http://92.222.81.117:8080 apply -f src/main/kubernetes/postgresql.yml'
+            sh 'kubectl --namespace=development --server=http://92.222.81.117:8080 apply -f src/main/kubernetes/helloworld.yml'
         }
     }
 }
