@@ -7,10 +7,10 @@ podTemplate(label: 'mypod', nodeSelector: 'medium', containers: [
                 image: 'maven:3.5.0',
                 ttyEnabled: true,
                 command: 'cat'),
-        containerTemplate(name: 'docker', 
-			image: 'docker', command: 'cat', ttyEnabled: true)], 
-			volumes: [hostPathVolume(hostPath: '/var/run/docker.sock', mountPath: '/var/run/docker.sock')]
-		) {
+        containerTemplate(name: 'docker',
+                image: 'docker', command: 'cat', ttyEnabled: true)],
+        volumes: [hostPathVolume(hostPath: '/var/run/docker.sock', mountPath: '/var/run/docker.sock')]
+) {
 
     node('mypod') {
 
@@ -20,10 +20,16 @@ podTemplate(label: 'mypod', nodeSelector: 'medium', containers: [
 
             sh 'mvn clean install'
         }
-		
-		container('docker') {
 
-            sh 'docker build .'
+        container('docker') {
+
+            sh 'echo {"insecure-registries" : ["registry.wildwidewest.xyz"]} > /etc/docker/daemon.json'
+
+            sh 'docker login -u admin -p admin123 registry.wildwidewest.xyz'
+
+            sh 'docker build . -t registry.wildwidewest.xyz/repository/docker-repository/pocs/helloworld'
+
+            sh 'docker push registry.wildwidewest.xyz/repository/docker-repository/pocs/helloworld'
         }
     }
 }
