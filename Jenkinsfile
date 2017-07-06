@@ -24,6 +24,8 @@ podTemplate(label: 'mypod', nodeSelector: 'medium', containers: [
 
         container('docker') {
 
+            sh 'whoami'
+
             sh 'mkdir /etc/docker'
 
             sh 'echo "{\"insecure-registries\" : [\"registry.wildwidewest.xyz\"]}" > /etc/docker/daemon.json'
