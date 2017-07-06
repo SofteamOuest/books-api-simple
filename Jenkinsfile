@@ -1,10 +1,14 @@
 #!groovy
 import java.text.SimpleDateFormat
 
-podTemplate(label: 'mypod', containers: [
+podTemplate(label: 'mypod', nodeSelector: 'medium', containers: [
         containerTemplate(name: 'jnlp', image: 'jenkinsci/jnlp-slave:alpine'),
         containerTemplate(name: 'maven',
                 image: 'maven:3.5.0',
+                ttyEnabled: true,
+                command: 'cat'),
+        containerTemplate(name: 'docker',
+                image: 'docker',
                 ttyEnabled: true,
                 command: 'cat')
 ]) {
@@ -16,6 +20,11 @@ podTemplate(label: 'mypod', containers: [
         container('maven') {
 
             sh 'mvn clean install'
+        }
+
+        container('docker') {
+
+            sh 'docker login registry.wildwidewest.xyz -u admin -p admin123'
         }
     }
 }
