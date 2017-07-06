@@ -30,6 +30,8 @@ podTemplate(label: 'mypod', nodeSelector: 'medium', containers: [
 
             sh 'echo "{\"insecure-registries\" : [\"registry.wildwidewest.xyz\"]}" > /etc/docker/daemon.json'
 
+            sh 'apk update'
+
             sh 'apk add openrc --no-cache'
 
             sh 'apk add docker'
