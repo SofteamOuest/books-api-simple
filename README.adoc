@@ -4,7 +4,7 @@
 == JOB Jenkins
 
 La définition du JOB Jenkins est réalisée dans le Jenkinsfile.
-
++ 
 Le JOB construit une image Docker est publie l'image sur notre dépot : registry.wildwidewest.xyz
 
 Le script Jenkinsfile
