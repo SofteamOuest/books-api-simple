@@ -20,5 +20,10 @@ podTemplate(label: 'mypod', nodeSelector: 'medium', containers: [
 
             sh 'mvn clean install'
         }
+		
+		container('docker') {
+
+            sh 'docker build .'
+        }
     }
 }
