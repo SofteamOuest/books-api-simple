@@ -10,7 +10,7 @@ podTemplate(label: 'mypod', nodeSelector: 'medium', containers: [
         containerTemplate(name: 'docker',
                 image: 'docker', command: 'cat', ttyEnabled: true), //
         containerTemplate(name: 'kubectl',
-                image: 'wernight/kubectl', command: 'cat', ttyEnabled: true)
+                image: 'lachlanevenson/k8s-kubectl', command: 'cat', ttyEnabled: true)
 ],
         volumes: [hostPathVolume(hostPath: '/var/run/docker.sock', mountPath: '/var/run/docker.sock')]
 ) {
