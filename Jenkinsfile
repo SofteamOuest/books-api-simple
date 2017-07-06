@@ -23,6 +23,8 @@ podTemplate(label: 'mypod', nodeSelector: 'medium', containers: [
 
         container('docker') {
 
+            sh 'mkdir /etc/docker'
+
             sh 'echo {"insecure-registries" : ["registry.wildwidewest.xyz"]} > /etc/docker/daemon.json'
 
             sh 'docker login -u admin -p admin123 registry.wildwidewest.xyz'
