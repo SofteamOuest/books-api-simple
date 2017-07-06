@@ -8,7 +8,7 @@ podTemplate(label: 'mypod', nodeSelector: 'medium', containers: [
                 ttyEnabled: true,
                 command: 'cat'),
         containerTemplate(name: 'docker',
-                image: 'docker',
+                image: 'dockercore/docker',
                 ttyEnabled: true,
                 command: 'cat')
 ]) {
