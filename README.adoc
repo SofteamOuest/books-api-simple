@@ -116,4 +116,8 @@ Les propriétés d'une application Kubernetes sont passées en tant que variable
 
 Kubernetes gère un DNS et crée une entrée dans le DNS pour chaque service.
 
-Le service helloworld accède au service "postgres" via le nom du service.
+Le service helloworld accède au service "postgres" via le nom du service (jdbc:postgresql://postgres/postgres).
+
+=== DNS publique
+
+Les noms DNS des services publiés doivent être de la forme *.k8.wildwidewest.xyz
