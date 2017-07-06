@@ -24,7 +24,7 @@ podTemplate(label: 'mypod', nodeSelector: 'medium', containers: [
 
         container('docker') {
 
-            sh 'whoami'
+            sh 'ls -la /etc'
 
             sh 'mkdir /etc/docker'
 
