@@ -9,7 +9,7 @@ podTemplate(label: 'mypod', nodeSelector: 'medium', containers: [
                 command: 'cat'),
         containerTemplate(name: 'docker', 
 			image: 'docker', command: 'cat', ttyEnabled: true)], 
-			volumes: [hostPathVolume(hostPath: '/var/run/docker.sock', mountPath: '/var/run/docker.sock')])
+			volumes: [hostPathVolume(hostPath: '/var/run/docker.sock', mountPath: '/var/run/docker.sock')]
 		) {
 
     node('mypod') {
