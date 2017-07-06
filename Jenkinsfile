@@ -1,7 +1,7 @@
 #!groovy
 import java.text.SimpleDateFormat
 
-podTemplate(label: 'mypod', nodeSelector: 'medium', containers: [
+podTemplate(label: 'helloworld-build-pod', nodeSelector: 'medium', containers: [
         containerTemplate(name: 'jnlp', image: 'jenkinsci/jnlp-slave:alpine'),
         containerTemplate(name: 'maven',
                 image: 'maven:3.5.0',
@@ -15,7 +15,7 @@ podTemplate(label: 'mypod', nodeSelector: 'medium', containers: [
         volumes: [hostPathVolume(hostPath: '/var/run/docker.sock', mountPath: '/var/run/docker.sock')]
 ) {
 
-    node('mypod') {
+    node('helloworld-build-pod') {
 
         git credentialsId: '53c71862-c245-4f4a-8fa1-b86ef32d0092', url: 'https://git.wildwidewest.xyz/melkouhen/helloworld.git'
 
@@ -39,7 +39,8 @@ podTemplate(label: 'mypod', nodeSelector: 'medium', containers: [
 
         container('kubectl') {
 
-            sh 'kubectl --server=http://92.222.81.117:8080 apply -f src/main/kubernetes/helloworld.yml'
+            sh 'kubectl --namespace=helloworld --server=http://92.222.81.117:8080 apply -f src/main/kubernetes/postgresql.yml'
+            sh 'kubectl --namespace=helloworld --server=http://92.222.81.117:8080 apply -f src/main/kubernetes/helloworld.yml'
         }
     }
 }
