@@ -1,11 +1,12 @@
 = Helloworld
 
-
 == JOB Jenkins
 
 La définition du JOB Jenkins est réalisée dans le Jenkinsfile.
 
-Le JOB construit une image Docker est publie l'image sur notre dépot : registry.wildwidewest.xyz
+Le JOB construit une image Docker puis publie l'image sur notre registry : registry.wildwidewest.xyz
+
+Le registry est un service de notre serveur nexus : nexus.wildwidewest.xyz
 
 Le script Jenkinsfile
 
