@@ -39,7 +39,7 @@ podTemplate(label: 'mypod', nodeSelector: 'medium', containers: [
 
         container('kubectl') {
 
-            sh 'kubectl --server=http://92.222.81.117:8080 apply -f src/main/kubernetes/deployment.yml'
+            sh 'kubectl --server=http://92.222.81.117:8080 apply -f src/main/kubernetes/helloworld.yml'
         }
     }
 }
