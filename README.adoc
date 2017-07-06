@@ -20,8 +20,8 @@ Le script Jenkinsfile
 
 Le déploiement de l'application est réalisé en applicant les fichiers de configuration kubernetes
 
-* src/main/kubernetes/postgresql.yml
-* src/main/kubernetes/helloworld.yml
+* src/main/kubernetes/postgresql.yml : déploiement de la base de données
+* src/main/kubernetes/helloworld.yml : déploiement de l'application
 
 === Deployment
 
@@ -121,3 +121,7 @@ Le service helloworld accède au service "postgres" via le nom du service (jdbc:
 === DNS publique
 
 Les noms DNS des services publiés doivent être de la forme *.k8.wildwidewest.xyz
+
+=== Ingress
+
+Il n'y a pas de configuration Ingress pour le service postgres. Il n'est donc pas possible d'y accéder en dehors du cluster kubernetes.
