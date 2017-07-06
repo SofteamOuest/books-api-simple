@@ -23,7 +23,7 @@ podTemplate(label: 'mypod', nodeSelector: 'medium', containers: [
 
             sh 'curl -v -F r=snapshots -F hasPom=false -F e=jar ' +
                     '-F g=com.softeam.pocs -F a=helloworld -F v=1.0.0-SNAPSHOT -F p=jar ' +
-                    '-F file=@helloworld.jar ' +
+                    '-F file=@target/helloworld.jar ' +
                     '-u admin:admin123 http://nexus.wildwidewest.xyz/service/local/artifact/maven/content'
         }
     }
