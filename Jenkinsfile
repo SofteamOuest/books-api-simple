@@ -8,7 +8,7 @@ podTemplate(label: 'mypod', nodeSelector: 'medium', containers: [
                 ttyEnabled: true,
                 command: 'cat'),
         containerTemplate(name: 'docker',
-                image: 'dockercore/docker',
+                image: 'docker',
                 ttyEnabled: true,
                 command: 'cat')
 ]) {
@@ -19,12 +19,14 @@ podTemplate(label: 'mypod', nodeSelector: 'medium', containers: [
 
         container('maven') {
 
-            sh 'mvn clean install'
+            //sh 'mvn clean install'
         }
 
         container('docker') {
 
-            sh 'docker login registry.wildwidewest.xyz -u admin -p admin123'
+            sh 'echo "{\"insecure-registries\" : [\"registry.wildwidewest.xyz\"]}" > /etc/docker/daemon.json'
+
+            sh 'docker login -u admin -p admin123 registry.wildwidewest.xyz '
         }
     }
 }
