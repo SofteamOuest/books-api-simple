@@ -1,22 +1,25 @@
 #!groovy
 import java.text.SimpleDateFormat
 
+// pod utilisé pour la compilation du projet
 podTemplate(label: 'helloworld-build-pod', nodeSelector: 'medium', containers: [
+
+        // le slave jenkins
         containerTemplate(name: 'jnlp', image: 'jenkinsci/jnlp-slave:alpine'),
-        containerTemplate(name: 'maven',
-                image: 'maven:3.5.0',
-                ttyEnabled: true,
-                command: 'cat'),
-        containerTemplate(name: 'docker',
-                image: 'docker', command: 'cat', ttyEnabled: true), //
-        containerTemplate(name: 'kubectl',
-                image: 'lachlanevenson/k8s-kubectl', command: 'cat', ttyEnabled: true)
-],
+        // un conteneur pour le build maven
+        containerTemplate(name: 'maven', image: 'maven:3.5.0', ttyEnabled: true, command: 'cat'),
+        // un conteneur pour construire les images docker
+        containerTemplate(name: 'docker', image: 'docker', command: 'cat', ttyEnabled: true),
+        // un conteneur pour déployer les services kubernetes
+        containerTemplate(name: 'kubectl', image: 'lachlanevenson/k8s-kubectl', command: 'cat', ttyEnabled: true)],
+
+        // montage nécessaire pour que le conteneur docker fonction (Docker In Docker)
         volumes: [hostPathVolume(hostPath: '/var/run/docker.sock', mountPath: '/var/run/docker.sock')]
 ) {
 
     node('helloworld-build-pod') {
 
+        // checkout des sources
         git credentialsId: '53c71862-c245-4f4a-8fa1-b86ef32d0092', url: 'https://git.wildwidewest.xyz/melkouhen/helloworld.git'
 
         container('maven') {
@@ -28,6 +31,7 @@ podTemplate(label: 'helloworld-build-pod', nodeSelector: 'medium', containers: [
 
             sh 'mkdir /etc/docker'
 
+            // le registry est insecure (pas de https)
             sh 'echo {"insecure-registries" : ["registry.wildwidewest.xyz"]} > /etc/docker/daemon.json'
 
             sh 'docker login -u admin -p admin123 registry.wildwidewest.xyz'
@@ -39,7 +43,10 @@ podTemplate(label: 'helloworld-build-pod', nodeSelector: 'medium', containers: [
 
         container('kubectl') {
 
+            // déploiement de la base de données
             sh 'kubectl --namespace=development --server=http://92.222.81.117:8080 apply -f src/main/kubernetes/postgresql.yml'
+
+            // déploiement du service
             sh 'kubectl --namespace=development --server=http://92.222.81.117:8080 apply -f src/main/kubernetes/helloworld.yml'
         }
     }
