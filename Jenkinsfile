@@ -14,7 +14,7 @@ podTemplate(label: 'helloworld-build-pod', nodeSelector: 'medium', containers: [
         containerTemplate(name: 'kubectl', image: 'lachlanevenson/k8s-kubectl', command: 'cat', ttyEnabled: true)],
 
         // montage nécessaire pour que le conteneur docker fonction (Docker In Docker)
-        // volumes: [hostPathVolume(hostPath: '/var/run/docker.sock', mountPath: '/var/run/docker.sock')]
+        volumes: [hostPathVolume(hostPath: '/var/run/docker.sock', mountPath: '/var/run/docker.sock')]
 ) {
 
     node('helloworld-build-pod') {
