@@ -1,8 +1,7 @@
-#!groovy
 import java.text.SimpleDateFormat
 
 // pod utilisé pour la compilation du projet
-podTemplate(label: 'helloworld-build-pod', nodeSelector: 'medium', containers: [
+podTemplate(label: 'api-book-build-pod', nodeSelector: 'medium', containers: [
 
         // le slave jenkins
         containerTemplate(name: 'jnlp', image: 'jenkinsci/jnlp-slave:alpine'),
@@ -17,37 +16,44 @@ podTemplate(label: 'helloworld-build-pod', nodeSelector: 'medium', containers: [
         volumes: [hostPathVolume(hostPath: '/var/run/docker.sock', mountPath: '/var/run/docker.sock')]
 ) {
 
-    node('helloworld-build-pod') {
+    node('api-book-build-pod') {
 
-        // checkout des sources
-        git credentialsId: '53c71862-c245-4f4a-8fa1-b86ef32d0092', url: 'https://git.wildwidewest.xyz/melkouhen/helloworld.git'
+        def now = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date())
+
+        stage('checkout sources'){
+                    checkout scm;
+        }
 
         container('maven') {
 
             sh 'mvn clean install'
         }
 
-        container('docker') {
+       container('docker') {
 
-            sh 'mkdir /etc/docker'
+                       stage('build docker image'){
 
-            // le registry est insecure (pas de https)
-            sh 'echo {"insecure-registries" : ["registry.wildwidewest.xyz"]} > /etc/docker/daemon.json'
 
-            sh 'docker login -u admin -p softeam44 registry.wildwidewest.xyz'
+                           sh "docker build -t registry.k8.wildwidewest.xyz/repository/docker-repository/pocs/meltingpoc-api-book:$now ."
 
-            sh 'docker build . -t registry.wildwidewest.xyz/repository/docker-repository/pocs/helloworld'
+                           sh 'mkdir /etc/docker'
 
-            sh 'docker push registry.wildwidewest.xyz/repository/docker-repository/pocs/helloworld'
-        }
+                           // le registry est insecure (pas de https)
+                           sh 'echo {"insecure-registries" : ["registry.k8.wildwidewest.xyz"]} > /etc/docker/daemon.json'
+
+                           withCredentials([string(credentialsId: 'nexus_password', variable: 'NEXUS_PWD')]) {
+
+                                sh "docker login -u admin -p ${NEXUS_PWD} registry.k8.wildwidewest.xyz"
+                           }
+
+                           sh "docker push registry.k8.wildwidewest.xyz/repository/docker-repository/pocs/meltingpoc-api-book:$now"
+
+                       }
+               }
 
         container('kubectl') {
 
-            // déploiement de la base de données
-            sh 'kubectl --namespace=development --server=http://92.222.81.117:8080 apply -f src/main/kubernetes/postgresql.yml'
 
-            // déploiement du service
-            sh 'kubectl --namespace=development --server=http://92.222.81.117:8080 apply -f src/main/kubernetes/helloworld.yml'
         }
     }
 }
