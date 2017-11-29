@@ -4,11 +4,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.softeam.pocs</groupId>
-    <artifactId>helloworld</artifactId>
+    <artifactId>api-book</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>helloworld</name>
+    <name>api-book</name>
     <description>Demo project for Spring Boot</description>
 
     <parent>
@@ -92,7 +92,7 @@
     </dependencies>
 
     <build>
-        <finalName>helloworld</finalName>
+        <finalName>api-book</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
@@ -138,7 +138,7 @@
                                     <inputSchema>public</inputSchema>
                                 </database>
                                 <target>
-                                    <packageName>com.softeam.pocs.helloworld.domain</packageName>
+                                    <packageName>com.softeam.pocs.api-book.domain</packageName>
                                     <directory>src/main/java</directory>
                                 </target>
                             </generator>
