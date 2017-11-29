@@ -1,5 +1,5 @@
 FROM java:8u111-jdk-alpine
 
-ADD target/books.jar .
+ADD target/api-book.jar .
 
-CMD java -jar helloworld.jar
+CMD java -jar api-book.jar
