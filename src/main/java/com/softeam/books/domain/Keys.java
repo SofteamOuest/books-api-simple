@@ -4,9 +4,7 @@
 package com.softeam.books.domain;
 
 
-import com.softeam.books.domain.tables.SchemaVersion;
 import com.softeam.books.domain.tables.TBook;
-import com.softeam.books.domain.tables.records.SchemaVersionRecord;
 import com.softeam.books.domain.tables.records.TBookRecord;
 
 import javax.annotation.Generated;
@@ -40,7 +38,6 @@ public class Keys {
     // UNIQUE and PRIMARY KEY definitions
     // -------------------------------------------------------------------------
 
-    public static final UniqueKey<SchemaVersionRecord> SCHEMA_VERSION_PK = UniqueKeys0.SCHEMA_VERSION_PK;
     public static final UniqueKey<TBookRecord> T_BOOK_PKEY = UniqueKeys0.T_BOOK_PKEY;
 
     // -------------------------------------------------------------------------
@@ -57,7 +54,6 @@ public class Keys {
     }
 
     private static class UniqueKeys0 extends AbstractKeys {
-        public static final UniqueKey<SchemaVersionRecord> SCHEMA_VERSION_PK = createUniqueKey(SchemaVersion.SCHEMA_VERSION, "schema_version_pk", SchemaVersion.SCHEMA_VERSION.INSTALLED_RANK);
         public static final UniqueKey<TBookRecord> T_BOOK_PKEY = createUniqueKey(TBook.T_BOOK, "t_book_pkey", TBook.T_BOOK.BOK_ID);
     }
 }

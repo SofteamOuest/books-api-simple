@@ -4,7 +4,6 @@
 package com.softeam.books.domain;
 
 
-import com.softeam.books.domain.tables.SchemaVersion;
 import com.softeam.books.domain.tables.TBook;
 
 import javax.annotation.Generated;
@@ -24,12 +23,7 @@ import javax.annotation.Generated;
 public class Tables {
 
     /**
-     * The table <code>public.schema_version</code>.
-     */
-    public static final SchemaVersion SCHEMA_VERSION = SchemaVersion.SCHEMA_VERSION;
-
-    /**
      * The table <code>public.t_book</code>.
      */
-    public static final TBook T_BOOK = TBook.T_BOOK;
+    public static final TBook T_BOOK = com.softeam.books.domain.tables.TBook.T_BOOK;
 }

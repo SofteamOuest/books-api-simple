@@ -126,7 +126,7 @@
                         <configuration>
                             <jdbc>
                                 <driver>org.postgresql.Driver</driver>
-                                <url>jdbc:postgresql://postgres/postgres?user=postgres&amp;password=mysecretpassword
+                                <url>jdbc:postgresql://127.0.0.1/apibook?user=apibook&amp;password=apibook
                                 </url>
                             </jdbc>
                             <generator>
@@ -138,7 +138,7 @@
                                     <inputSchema>public</inputSchema>
                                 </database>
                                 <target>
-                                    <packageName>com.softeam.pocs.api-book.domain</packageName>
+                                    <packageName>com.softeam.books.domain</packageName>
                                     <directory>src/main/java</directory>
                                 </target>
                             </generator>

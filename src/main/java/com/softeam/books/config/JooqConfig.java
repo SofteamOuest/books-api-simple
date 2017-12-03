@@ -21,7 +21,7 @@ public class JooqConfig {
     @Value("${spring.datasource.driverClassName:org.postgresql.Driver}")
     private String driverClassName;
 
-    @Value("${spring.datasource.url:jdbc:postgresql://localhost:5432/postgres}")
+    @Value("${spring.datasource.url:jdbc:postgresql://localhost:5432/apibook}")
     private String url;
 
     @Value("${spring.datasource.username:apibook}")

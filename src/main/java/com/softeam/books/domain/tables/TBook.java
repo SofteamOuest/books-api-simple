@@ -4,9 +4,9 @@
 package com.softeam.books.domain.tables;
 
 
+import com.softeam.books.domain.Keys;
 import com.softeam.books.domain.Public;
 import com.softeam.books.domain.tables.records.TBookRecord;
-import com.softeam.books.domain.Keys;
 
 import java.util.Arrays;
 import java.util.List;
@@ -35,7 +35,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class TBook extends TableImpl<TBookRecord> {
 
-    private static final long serialVersionUID = -17802313;
+    private static final long serialVersionUID = 117820809;
 
     /**
      * The reference instance of <code>public.t_book</code>
@@ -59,6 +59,11 @@ public class TBook extends TableImpl<TBookRecord> {
      * The column <code>public.t_book.bok_title</code>.
      */
     public final TableField<TBookRecord, String> BOK_TITLE = createField("bok_title", org.jooq.impl.SQLDataType.VARCHAR.length(128).nullable(false), this, "");
+
+    /**
+     * The column <code>public.t_book.bok_authors</code>.
+     */
+    public final TableField<TBookRecord, String> BOK_AUTHORS = createField("bok_authors", org.jooq.impl.SQLDataType.VARCHAR.length(128).nullable(false), this, "");
 
     /**
      * Create a <code>public.t_book</code> table reference

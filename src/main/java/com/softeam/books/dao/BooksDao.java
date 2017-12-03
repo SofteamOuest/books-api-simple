@@ -18,7 +18,7 @@ public class BooksDao {
     private DSLContext jooq;
 
     public Collection<BookDto> findAll() {
-        return jooq.select(Tables.T_BOOK.BOK_ID, Tables.T_BOOK.BOK_TITLE).from(Tables.T_BOOK)
-                .fetch().map(idAndTitle -> new BookDto(idAndTitle.value1(), idAndTitle.value2()));
+        return jooq.select(Tables.T_BOOK.BOK_ID, Tables.T_BOOK.BOK_TITLE, Tables.T_BOOK.BOK_AUTHORS).from(Tables.T_BOOK)
+                .fetch().map(row -> new BookDto(row.value1(), row.value2(), row.value3()));
     }
 }

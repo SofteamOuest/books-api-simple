@@ -9,11 +9,24 @@ public class BookDto {
 
     private String title;
 
-    public BookDto(Integer id, String s) {
+    private String authors;
+
+    public String getAuthors() {
+        return authors;
+    }
+
+    public void setAuthors(String authors) {
+        this.authors = authors;
+    }
+
+    public BookDto(Integer id, String title, String authors) {
 
         this.id = id;
 
-        this.title = s;
+        this.title = title;
+
+        this.authors = authors;
+
     }
 
     public String getTitle() {

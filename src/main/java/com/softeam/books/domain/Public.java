@@ -4,7 +4,6 @@
 package com.softeam.books.domain;
 
 
-import com.softeam.books.domain.tables.SchemaVersion;
 import com.softeam.books.domain.tables.TBook;
 
 import java.util.ArrayList;
@@ -32,7 +31,7 @@ import org.jooq.impl.SchemaImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Public extends SchemaImpl {
 
-    private static final long serialVersionUID = 2051457015;
+    private static final long serialVersionUID = 1137170786;
 
     /**
      * The reference instance of <code>public</code>
@@ -40,14 +39,9 @@ public class Public extends SchemaImpl {
     public static final Public PUBLIC = new Public();
 
     /**
-     * The table <code>public.schema_version</code>.
-     */
-    public final SchemaVersion SCHEMA_VERSION = SchemaVersion.SCHEMA_VERSION;
-
-    /**
      * The table <code>public.t_book</code>.
      */
-    public final TBook T_BOOK = TBook.T_BOOK;
+    public final TBook T_BOOK = com.softeam.books.domain.tables.TBook.T_BOOK;
 
     /**
      * No further instances allowed
@@ -86,7 +80,6 @@ public class Public extends SchemaImpl {
 
     private final List<Table<?>> getTables0() {
         return Arrays.<Table<?>>asList(
-            SchemaVersion.SCHEMA_VERSION,
             TBook.T_BOOK);
     }
 }

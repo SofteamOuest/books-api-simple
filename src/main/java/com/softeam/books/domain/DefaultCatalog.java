@@ -27,7 +27,7 @@ import org.jooq.impl.CatalogImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class DefaultCatalog extends CatalogImpl {
 
-    private static final long serialVersionUID = -396608667;
+    private static final long serialVersionUID = 1685849605;
 
     /**
      * The reference instance of <code></code>
@@ -37,7 +37,7 @@ public class DefaultCatalog extends CatalogImpl {
     /**
      * The schema <code>public</code>.
      */
-    public final Public PUBLIC = Public.PUBLIC;
+    public final Public PUBLIC = com.softeam.books.domain.Public.PUBLIC;
 
     /**
      * No further instances allowed
