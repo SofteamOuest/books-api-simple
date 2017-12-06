@@ -1,9 +1,15 @@
 FROM java:8u111-jdk-alpine
 MAINTAINER Mehdi EL KOUHEN <mehdi.elkouhen@gmail.com>
 
-WORKDIR /apps
+RUN addgroup books
+RUN adduser books-api -G books -H -D
 
-ADD target/api-book.jar .
+WORKDIR /home/books-api
+
+COPY target/api-book.jar .
+RUN chown books-api:books api-book.jar
+
+USER books-api:books
 
 CMD java -jar api-book.jar
 
