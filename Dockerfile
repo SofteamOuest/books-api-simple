@@ -13,4 +13,8 @@ USER books-api:books
 
 CMD java -jar api-book.jar
 
+#RUN apk update
+
+#RUN apk add curl
+
 EXPOSE 8080
