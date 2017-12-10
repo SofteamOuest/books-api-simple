@@ -1,0 +1,1 @@
+docker run --rm  -v  C:\Users\softeam2\dev\books-api:/usr/src/maven -w /usr/src/maven maven:3.5.2-jdk-8-alpine mvn clean install
