@@ -54,6 +54,11 @@ podTemplate(label: 'api-book-build-pod', nodeSelector: 'medium', containers: [
         container('kubectl') {
 
 
+                build job: "books-api-simple-run/master",
+                                  wait: false,
+                                  parameters: [[$class: 'StringParameterValue', name: 'image', value: "$now"]]
+
+            }
         }
     }
 }
