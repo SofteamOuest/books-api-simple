@@ -1,13 +1,12 @@
 package com.softeam.books.resources;
 
-import com.softeam.books.blo.BooksBlo;
 import com.softeam.books.dto.BookDto;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 /**
@@ -17,13 +16,14 @@ import java.util.Collection;
 @RequestMapping(path = "/books")
 public class BooksResource {
 
-    @Autowired
-    private BooksBlo booksBlo;
 
     @CrossOrigin("*")
     @GetMapping
-    public Collection<BookDto> helloworld() {
-        return booksBlo.findAll();
+    public Collection<BookDto> books() {
+        final ArrayList books = new ArrayList();
+
+        books.add(new BookDto(1, "title", "author 1"));
+        return books;
     }
 
 }
