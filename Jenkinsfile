@@ -34,7 +34,7 @@ podTemplate(label: 'api-book-build-pod', nodeSelector: 'medium', containers: [
                        stage('build docker image'){
 
 
-                           sh "docker build -t registry.k8.wildwidewest.xyz/repository/docker-repository/pocs/meltingpoc-api-book:$now ."
+                           sh "docker build -t registry.k8.wildwidewest.xyz/repository/docker-repository/pocs/books-api-simple:$now ."
 
                            sh 'mkdir /etc/docker'
 
@@ -46,7 +46,7 @@ podTemplate(label: 'api-book-build-pod', nodeSelector: 'medium', containers: [
                                 sh "docker login -u admin -p ${NEXUS_PWD} registry.k8.wildwidewest.xyz"
                            }
 
-                           sh "docker push registry.k8.wildwidewest.xyz/repository/docker-repository/pocs/meltingpoc-api-book:$now"
+                           sh "docker push registry.k8.wildwidewest.xyz/repository/docker-repository/pocs/books-api-simple:$now"
 
                        }
                }
