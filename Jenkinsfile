@@ -26,30 +26,30 @@ podTemplate(label: 'api-book-build-pod', nodeSelector: 'medium', containers: [
 
         container('maven') {
 
-            sh 'mvn clean install'
+            sh 'mvn clean package sonar:sonar -Dsonar.host.url=http://sonarqube.k8.wildwidewest.xyz -Dsonar.java.binaries=target'
         }
 
        container('docker') {
+            
+            stage('build docker image'){
 
-                       stage('build docker image'){
 
+                sh "docker build -t registry.k8.wildwidewest.xyz/repository/docker-repository/pocs/books-api-simple:$now ."
 
-                           sh "docker build -t registry.k8.wildwidewest.xyz/repository/docker-repository/pocs/books-api-simple:$now ."
+                sh 'mkdir /etc/docker'
 
-                           sh 'mkdir /etc/docker'
+                // le registry est insecure (pas de https)
+                sh 'echo {"insecure-registries" : ["registry.k8.wildwidewest.xyz"]} > /etc/docker/daemon.json'
 
-                           // le registry est insecure (pas de https)
-                           sh 'echo {"insecure-registries" : ["registry.k8.wildwidewest.xyz"]} > /etc/docker/daemon.json'
+                withCredentials([string(credentialsId: 'nexus_password', variable: 'NEXUS_PWD')]) {
 
-                           withCredentials([string(credentialsId: 'nexus_password', variable: 'NEXUS_PWD')]) {
+                    sh "docker login -u admin -p ${NEXUS_PWD} registry.k8.wildwidewest.xyz"
+                }
 
-                                sh "docker login -u admin -p ${NEXUS_PWD} registry.k8.wildwidewest.xyz"
-                           }
+                sh "docker push registry.k8.wildwidewest.xyz/repository/docker-repository/pocs/books-api-simple:$now"
 
-                           sh "docker push registry.k8.wildwidewest.xyz/repository/docker-repository/pocs/books-api-simple:$now"
-
-                       }
-               }
+                }
+            }
 
         container('kubectl') {
 
@@ -57,7 +57,6 @@ podTemplate(label: 'api-book-build-pod', nodeSelector: 'medium', containers: [
                 build job: "books-api-simple-run/master",
                                   wait: false,
                                   parameters: [[$class: 'StringParameterValue', name: 'image', value: "$now"]]
-
 
         }
     }
